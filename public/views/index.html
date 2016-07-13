@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="olympianApp">
+  <head>
+    <meta charset="utf-8" />
+    <title>An Angular/Express/JSON Challenge of Olympic Proportions</title>
+    <script src="vendor/angular.min.js" charset="utf-8"></script>
+    <script src="vendor/angular-route.min.js" charset="utf-8"></script>
+    <script src="client.js" charset="utf-8"></script>
+    <link href="stylesheet.css" rel="stylesheet" />
+    <base href="/" />
+  </head>
+  <body>
+
+    <a href="/synchronizedSwimming"><button>Synchronized Swimming</button></a>
+    <a href="/tableTennis"><button>Table Tennis</button></a>
+    <a href="/badminton"><button>Badminton</button></a>
+    <a href="/wrestling"><button>Wrestling</button></a>
+    <a href="/gymnastics"><button>Gymnastics</button></a>
+
+    <div ng-view>
+
+    </div>
+
+  </body>
+</html>

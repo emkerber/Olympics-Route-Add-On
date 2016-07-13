@@ -1,6 +1,6 @@
 var express = require('express');
-var index = require('./index.js');
-var olympics = require('./olympics.js');
+var index = require('./routes/index.js');
+var olympics = require('./routes/olympics.js');
 
 var app = express();
 

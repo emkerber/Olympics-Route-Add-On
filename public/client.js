@@ -1,14 +1,12 @@
-var app = angular.module('olympianApp', []);
+var app = angular.module('olympianApp', ['ngRoute']);
 
 
+function handleFailure(response) {
+  console.log('Failure:', response);
+};
 
 
-app.controller('OlympianController', function($scope, $http){
-
-//$scope.getOlympians = getOlympians;
-  //$scope.synchronizedSwimming = getOlympians(configS)
-
-
+app.controller('SynchronizedSwimmingController', function($scope, $http){
 
   var configSynchronizedSwimming = {
     method: 'GET',
@@ -20,6 +18,16 @@ app.controller('OlympianController', function($scope, $http){
     console.log('Success:', response.data);
   };
 
+  $scope.getSynchronizedSwimming = function() {
+    console.log('click: synchronized swimming');
+    $http(configSynchronizedSwimming).then(handleSynchronizedSwimmingSuccess, handleFailure);
+  };
+
+  $scope.getSynchronizedSwimming();
+});
+
+app.controller('TableTennisController', function($scope, $http){
+
   var configTableTennis = {
     method: 'GET',
     url: '/olympics/tableTennis'
@@ -29,6 +37,16 @@ app.controller('OlympianController', function($scope, $http){
     $scope.tableTennis = response.data;
     console.log('Success:', response.data);
   };
+
+  $scope.getTableTennis = function() {
+    console.log('click: table tennis');
+    $http(configTableTennis).then(handleTableTennisSuccess, handleFailure);
+  };
+
+  $scope.getTableTennis();
+});
+
+app.controller('BadmintonController', function($scope, $http){
 
   var configBadminton = {
     method: 'GET',
@@ -40,6 +58,16 @@ app.controller('OlympianController', function($scope, $http){
     console.log('Success:', response.data);
   };
 
+  $scope.getBadminton = function() {
+    console.log('click: badminton');
+    $http(configBadminton).then(handleBadmintonSuccess, handleFailure);
+  };
+
+  $scope.getBadminton();
+});
+
+app.controller('WrestlingController', function($scope, $http){
+
   var configWrestling = {
     method: 'GET',
     url: '/olympics/wrestling'
@@ -49,6 +77,16 @@ app.controller('OlympianController', function($scope, $http){
     $scope.wrestling = response.data;
     console.log('Success:', response.data);
   };
+
+  $scope.getWrestling = function() {
+    console.log('click: wrestling');
+    $http(configWrestling).then(handleWrestlingSuccess, handleFailure);
+  };
+
+  $scope.getWrestling();
+});
+
+app.controller('GymnasticsController', function($scope, $http){
 
   var configGymnastics = {
     method: 'GET',
@@ -60,17 +98,36 @@ app.controller('OlympianController', function($scope, $http){
     console.log('Success:', response.data);
   };
 
-  function handleFailure(response) {
-    console.log('Failure:', response);
+  $scope.getGymnastics = function() {
+    console.log('click: gymnastics');
+    $http(configGymnastics).then(handleGymnasticsSuccess, handleFailure);
   };
 
-
-  $scope.getOlympians = function() {
-    console.log('click');
-    $http(configSynchronizedSwimming).then(handleSynchronizedSwimmingSuccess, handleFailure);
-    $http(configTableTennis).then(handleTableTennisSuccess, handleFailure);
-    $http(configBadminton).then(handleBadmintonSuccess, handleFailure);
-    $http(configWrestling).then(handleWrestlingSuccess, handleFailure);
-    $http(configGymnastics).then(handleGymnasticsSuccess, handleFailure);
-  }
+  $scope.getGymnastics();
 });
+
+app.config(function($routeProvider, $locationProvider){
+  $routeProvider
+    .when('/synchronizedSwimming', {
+      templateUrl:'views/synchronizedSwimming.html',
+      controller:'SynchronizedSwimmingController'
+    })
+    .when('/tableTennis', {
+      templateUrl:'views/tableTennis.html',
+      controller: 'TableTennisController'
+    })
+    .when('/badminton', {
+      templateUrl:'views/badminton.html',
+      controller: 'BadmintonController'
+    })
+    .when('/wrestling', {
+      templateUrl:'views/wrestling.html',
+      controller: 'WrestlingController'
+    })
+    .when('/gymnastics', {
+      templateUrl:'views/gymnastics.html',
+      controller: 'GymnasticsController'
+    })
+
+  $locationProvider.html5Mode(true);
+})
